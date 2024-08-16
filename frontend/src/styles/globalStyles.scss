@@ -1,0 +1,10 @@
+@import '_variables.scss';
+@import '_mixins.scss';
+
+// Global Styles
+* {
+    font-family: $font-family;
+    color: $text-color;
+    margin: 0;
+    padding: 0;
+}

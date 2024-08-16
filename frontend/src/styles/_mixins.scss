@@ -1,0 +1,43 @@
+// Responsive Mixins
+@mixin respond-to($breakpoint) {
+    @if $breakpoint ==mobile {
+        @media (max-width: $mobile) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==tablet {
+        @media (max-width: $tablet) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==desktop {
+        @media (min-width: $desktop) {
+            @content;
+        }
+    }
+
+    @else {
+        @error "Invalid breakpoint: #{$breakpoint}. To fix this, add the correct breakpoint to the _variables.scss file.";
+    }
+}
+
+// Flexbox Mixins
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Box Shadow Mixins
+@mixin box-shadow($shadow: 0 4px 8px rgba(0, 0, 0, 0.2)) {
+    box-shadow: $shadow;
+}
+
+// Common colors and fonts mixins
+@mixin common-colors-and-fonts {
+    color: $text-color;
+    font-family: $font-family;
+    background-color: $background-color;
+}

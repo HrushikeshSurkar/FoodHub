@@ -1,0 +1,88 @@
+@import '../../../styles/_variables.scss';
+@import '../../../styles/mixins';
+
+.login-container {
+    @include flex-center;
+    height: 100vh;
+    background-color: $secondary-color;
+    padding: $spacing-unit;
+
+}
+
+.login-card {
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.login-title {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: $primary-color;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: $spacing-unit;
+}
+
+.form-label {
+    color: $text-color;
+    font-size: $font-size-base;
+    text-align: left;
+}
+
+.form-control {
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    font-size: $font-size-base;
+    background-color: #fafafa;
+
+    &::placeholder {
+        color: $text-color;
+    }
+}
+
+.form-control:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.2);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $btn-background-color;
+    color: $btn-text-color;
+    border: none;
+    font-size: 1rem;
+    margin-top: 20px;
+    font-weight: bold;
+
+    &:hover {
+        background-color: $btn-background-hover-color;
+    }
+}
+
+.btn-link {
+    padding: 0;
+    border: none;
+    background: none;
+    color: $btn-link-color;
+    cursor: pointer;
+    font-size: $font-size-base;
+    text-decoration: none;
+
+    &:hover {
+        color: darken($btn-link-color, 10%);
+        text-decoration: underline;
+    }
+}
+
+.password-checkbox {
+    margin-bottom: $spacing-unit;
+}
