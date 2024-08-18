@@ -6,20 +6,16 @@ import {
   getUserProfile,
   updateUserProfile,
   deleteUserProfile,
-  forgotPassword,
-  resetPassword,
 } from "../controllers/authController.js";
-import { authenticateToken } from "../middleware/authMiddleware.js";
+import { isAuthenticated } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.post("/logout", authenticateToken, logoutUser); // Requires authentication
-router.get("/profile", authenticateToken, getUserProfile); // Requires authentication
-router.put("/profile", authenticateToken, updateUserProfile); // Requires authentication
-router.delete("/profile", authenticateToken, deleteUserProfile); // Requires authentication
-router.post("/forgot-password", forgotPassword);
-router.post("/reset-password", resetPassword);
+router.post("/logout", logoutUser);
+router.get("/profile", isAuthenticated, getUserProfile);
+router.put("/profile", isAuthenticated, updateUserProfile);
+router.delete("/profile", isAuthenticated, deleteUserProfile);
 
 export default router;

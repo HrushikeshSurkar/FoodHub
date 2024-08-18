@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import sessionConfig from "./config/sessionConfig.js";
 import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(sessionConfig); // Apply session middleware
 
 // Routes
 app.use("/api", authRoutes);
@@ -38,7 +40,7 @@ app.use((err, req, res, next) => {
 
 // 404 Handler
 app.use((req, res) => {
-  res.status(404).json({ message: "Resource not found" });
+  res.status(404).json({ message: `Resource not found ${req.originalUrl}` });
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

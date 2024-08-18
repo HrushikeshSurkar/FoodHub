@@ -1,9 +1,6 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import User from "../models/userModel.js";
-import { JWT_SECRET } from "../config.js";
+import User from "../models/UserModel.js";
 
-// Register User
 export const registerUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -22,43 +19,49 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// Login User
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+    if (!user)
+      return res
+        .status(400)
+        .json({ message: "Invalid credentials", success: false });
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch)
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res
+        .status(400)
+        .json({ message: "Invalid credentials", success: false });
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
-    res.status(200).json({ token });
+    req.session.userId = user._id; // Save user ID in session
+    res.status(200).json({ message: "Logged in successfully", success: true });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: `Server error ${error}`, success: false });
   }
 };
 
-// Logout User
 export const logoutUser = (req, res) => {
-  res.status(200).json({ message: "Logged out successfully" });
+  req.session.destroy((err) => {
+    if (err) return res.status(500).json({ message: "Logout failed" });
+    res.status(200).json({ message: "Logged out successfully" });
+  });
 };
 
-// Get User Profile
 export const getUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.session.userId);
+
     if (!user) return res.status(404).json({ message: "User not found" });
+
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
 };
 
-// Update User Profile
 export const updateUserProfile = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -67,34 +70,24 @@ export const updateUserProfile = async (req, res) => {
     if (email) updatedData.email = email;
     if (password) updatedData.password = await bcrypt.hash(password, 10);
 
-    const user = await User.findByIdAndUpdate(req.user.id, updatedData, {
+    const user = await User.findByIdAndUpdate(req.session.userId, updatedData, {
       new: true,
     });
+
     if (!user) return res.status(404).json({ message: "User not found" });
+
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
 };
 
-// Delete User Profile
 export const deleteUserProfile = async (req, res) => {
   try {
-    await User.findByIdAndDelete(req.user.id);
+    await User.findByIdAndDelete(req.session.userId);
+    req.session.destroy(); // Destroy session after user deletion
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
-};
-
-// Forgot Password
-export const forgotPassword = async (req, res) => {
-  // Placeholder for future implementation
-  res.status(501).json({ message: "Not implemented" });
-};
-
-// Reset Password
-export const resetPassword = async (req, res) => {
-  // Placeholder for future implementation
-  res.status(501).json({ message: "Not implemented" });
 };
