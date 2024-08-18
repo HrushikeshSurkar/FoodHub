@@ -1,12 +1,16 @@
 import "./styles/globalStyles.scss";
 import { BrowserRouter as Router } from "react-router-dom";
-import AppRouter from "./router/AppRouter";
+import { AppProvider } from "./context/AppContext";
+import AppRoutes from "./routes/AppRoutes";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 const App = () => {
   return (
-    <Router>
-      <AppRouter />
-    </Router>
+    <AppProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </AppProvider>
   );
 };
 

@@ -9,29 +9,40 @@ project-root/
     ├── src/
     │   ├── assets/
     │   ├── components/
-    │   ├── pages
-    │   │   ├── About
+    │   ├── context/
+    │   │   └── AuthContext.jsx
+    │   ├── hooks/
+    │   ├── pages/
+    │   │   ├── About/
     │   │   │   ├── About.jsx
     │   │   │   └── About.scss
-    │   │   ├── Blogs
+    │   │   ├── Blogs/
     │   │   │   ├── Blogs.jsx
     │   │   │   └── Blogs.scss
-    │   │   ├── Contact
+    │   │   ├── Contact/
     │   │   │   ├── Contact.jsx
     │   │   │   └── Contact.scss
-    │   │   ├── Home
+    │   │   ├── Home/
     │   │   │   ├── Home.jsx
     │   │   │   └── Home.scss
-    │   │   ├── Authentication
-    │   │   │   ├── Login
+    │   │   ├── Dashboard/
+    │   │   │   ├── Dashboard.jsx
+    │   │   │   └── Dashboard.scss
+    │   │   ├── Profile/
+    │   │   │   ├── Profile.jsx
+    │   │   │   └── Profile.scss
+    │   │   ├── Authentication/
+    │   │   │   ├── Login/
     │   │   │   │   ├── Login.jsx
     │   │   │   │   └── Login.scss
-    │   │   │   └── Register
+    │   │   │   └── Register/
     │   │   │       ├── Register.jsx
     │   │   │       └── Register.scss
-    │   ├── hooks/
-    │   ├── context/
     │   ├── routes/
+    │   │   ├── AppRoutes.jsx        # Main routing logic
+    │   │   ├── InnerRoutes.jsx      # Authenticated routes
+    │   │   ├── OuterRoutes.jsx      # Public routes
+    │   │   ├── routes.jsx      # all routes
     │   ├── store/
     │   │   ├── rootReducer.jsx
     │   │   └── store.jsx
