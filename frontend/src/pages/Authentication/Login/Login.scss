@@ -1,88 +1,117 @@
 @import '../../../styles/_variables.scss';
-@import '../../../styles/mixins';
+@import '../../../styles/_mixins';
 
-.login-container {
-    @include flex-center;
-    height: 100vh;
-    background-color: $secondary-color;
-    padding: $spacing-unit;
-
-}
-
-.login-card {
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-}
-
-.login-title {
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: $primary-color;
-    font-weight: bold;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: $spacing-unit;
-}
-
-.form-label {
-    color: $text-color;
-    font-size: $font-size-base;
-    text-align: left;
-}
-
-.form-control {
+// Main container for login form
+.main-login-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    margin: 15vh auto 0;
+    padding: 20px;
+    min-width: 350px;
+    max-width: fit-content;
     border: 1px solid $border-color;
-    border-radius: 5px;
-    font-size: $font-size-base;
-    background-color: #fafafa;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: $background-color;
+}
 
-    &::placeholder {
+// Title styling
+.main-login-title {
+    text-align: center;
+    margin-bottom: 20px;
+
+    h1 {
         color: $text-color;
+        font-family: cursive;
     }
 }
 
-.form-control:focus {
-    border-color: $primary-color;
-    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.2);
+// Input fields with floating labels
+.input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+
+    input {
+        width: 100%;
+        padding: 12px 10px;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        font-size: 16px;
+        color: $text-color;
+        background-color: transparent;
+        transition: border-color 0.3s;
+
+        &::placeholder {
+            color: darken($text-color, 30%); // Darker placeholder color
+            opacity: 1; // Ensures the placeholder is fully opaque
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $color4;
+        }
+
+        &:focus+label,
+        &:not(:placeholder-shown)+label {
+            transform: translateY(-150%);
+            font-size: 12px;
+            color: $color4;
+        }
+    }
+
+    label {
+        position: absolute;
+        top: 50%;
+        left: 12px;
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: $border-color;
+        pointer-events: none;
+        transition: all 0.2s ease-out;
+    }
 }
 
-.submit-button {
-    width: 100%;
+// Login button styling
+.main-login-button {
     padding: 10px;
-    border-radius: 5px;
-    background-color: $btn-background-color;
-    color: $btn-text-color;
+    text-align: center;
+    background-color: $color4;
+    color: $button-text-color;
     border: none;
-    font-size: 1rem;
-    margin-top: 20px;
-    font-weight: bold;
-
-    &:hover {
-        background-color: $btn-background-hover-color;
-    }
-}
-
-.btn-link {
-    padding: 0;
-    border: none;
-    background: none;
-    color: $btn-link-color;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: $font-size-base;
-    text-decoration: none;
+    margin-bottom: 15px;
 
     &:hover {
-        color: darken($btn-link-color, 10%);
-        text-decoration: underline;
+        background-color: darken($color4, 10%);
     }
 }
 
-.password-checkbox {
-    margin-bottom: $spacing-unit;
+// Forgot password link styling
+.main-login-forgot-password {
+    text-align: right;
+    color: $link-color;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+// Sign up button styling
+.main-login-sign-up-button {
+    @include flex-center;
+    width: 50vw;
+    margin: 10px auto 0;
+    padding: 20px;
+    min-width: 350px;
+    max-width: fit-content;
+    border: 1px solid $border-color;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: $background-color;
+    cursor: pointer;
+
+    span {
+        margin-left: 5px;
+        color: $color4;
+    }
 }

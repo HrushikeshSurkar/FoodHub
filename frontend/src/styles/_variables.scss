@@ -1,32 +1,25 @@
-// Color Variables
-$primary-color: #3897f0; // Instagram blue
-$secondary-color: #fafafa; // Light gray
-$border-color: #dbdbdb; // Border gray
-$text-color: #262626; // Dark text
-$card-background-color: #ffffff; // Card background
-$btn-link-color: #3897f0; // Link button color
-$btn-text-color: #ffffff; // Button text color
-$btn-background-color: #3897f0; // Button background color
-$btn-background-hover-color: #2e78b6; // Button hover background color
+// Main color palette
+$color1: #e63946;
+$color2: #f1faee;
+$color3: #a8dadc;
+$color4: #009dff;
+$color5: #1d3557;
 
-// Font Variables
-$font-family: 'Roboto', sans-serif; // Updated to a more modern font
-$font-size-base: 16px; // Base font size
-$font-size-large: 18px; // Larger font size
-$font-size-small: 14px; // Smaller font size
+// Text color
+$text-color: $color5;
 
-// Spacing Variables
-$spacing-unit: 16px; // Base spacing unit
-$padding: $spacing-unit; // Padding
-$margin: $spacing-unit; // Margin
+// Border color
+$border-color: #dbdbdb;
+$border-color-after: $color3;
 
-// Border Radius
-$border-radius: 8px; // Updated for a more modern look
+// Background color
+$background-color: $color2;
 
-// Breakpoints
-$mobile: 480px; // Mobile breakpoint
-$tablet: 768px; // Tablet breakpoint
-$desktop: 1024px; // Desktop breakpoint
+// Button text color
+$button-text-color: $color2;
 
-// Box Shadow
-$box-shadow-light: 0 4px 8px rgba(0, 0, 0, 0.15); // Softer shadow for a modern appearance
+// Link color
+$link-color: $color4;
+
+// Font family
+$font-family: 'Roboto', sans-serif;
