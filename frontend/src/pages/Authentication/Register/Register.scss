@@ -42,8 +42,8 @@
         transition: border-color 0.3s;
 
         &::placeholder {
-            color: darken($text-color, 30%); // Darker placeholder color
-            opacity: 1; // Ensures the placeholder is fully opaque
+            color: darken($text-color, 30%);
+            opacity: 1;
         }
 
         &:focus {
@@ -81,7 +81,7 @@
     border-radius: 8px;
     cursor: pointer;
     margin-bottom: 15px;
-    width: 100%; // Ensures full width like the login button
+    width: 100%;
 
     &:hover {
         background-color: darken($color4, 10%);

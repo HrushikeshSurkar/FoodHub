@@ -3,52 +3,53 @@
 ## Folder Structure
 
 ```bash
-project-root/
-├── frontend/
-    ├── public/
-    ├── src/
+project-root
+├── frontend
+    ├── public
+    ├── src
     │   ├── assets/
     │   ├── components/
-    │   ├── context/
+    │   ├── context
     │   │   └── AuthContext.jsx
     │   ├── hooks/
-    │   ├── pages/
-    │   │   ├── About/
+    │   ├── pages
+    │   │   ├── About
     │   │   │   ├── About.jsx
     │   │   │   └── About.scss
-    │   │   ├── Blogs/
+    │   │   ├── Blogs
     │   │   │   ├── Blogs.jsx
     │   │   │   └── Blogs.scss
-    │   │   ├── Contact/
+    │   │   ├── Contact
     │   │   │   ├── Contact.jsx
     │   │   │   └── Contact.scss
-    │   │   ├── Home/
+    │   │   ├── Home
     │   │   │   ├── Home.jsx
     │   │   │   └── Home.scss
-    │   │   ├── Dashboard/
+    │   │   ├── Dashboard
     │   │   │   ├── Dashboard.jsx
     │   │   │   └── Dashboard.scss
-    │   │   ├── Profile/
+    │   │   ├── Profile
     │   │   │   ├── Profile.jsx
     │   │   │   └── Profile.scss
-    │   │   ├── Authentication/
-    │   │   │   ├── Login/
+    │   │   ├── Authentication
+    │   │   │   ├── Login
     │   │   │   │   ├── Login.jsx
     │   │   │   │   └── Login.scss
-    │   │   │   └── Register/
+    │   │   │   └── Register
     │   │   │       ├── Register.jsx
     │   │   │       └── Register.scss
-    │   ├── routes/
+    │   ├── routes
     │   │   ├── AppRoutes.jsx        # Main routing logic
     │   │   ├── InnerRoutes.jsx      # Authenticated routes
     │   │   ├── OuterRoutes.jsx      # Public routes
     │   │   ├── routes.jsx      # all routes
-    │   ├── store/
+    │   ├── services/
+    │   ├── store
     │   │   ├── rootReducer.jsx
     │   │   └── store.jsx
     │   ├── App.jsx
     │   ├── main.js
-    │   └── styles/
+    │   └── styles
     │       ├── _mixins.scss
     │       ├── _variables.scss
     │       └── globalStyles.scss

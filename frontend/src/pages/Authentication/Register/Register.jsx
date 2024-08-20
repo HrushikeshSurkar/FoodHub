@@ -1,16 +1,29 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import "./Register.scss";
 
 const Register = () => {
-  const navigate = useNavigate(); // For navigation
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = (event) => {
     event.preventDefault();
-    // Handle registration logic here
   };
 
   const handleSignIn = () => {
-    navigate("/login"); // Navigate to the login page
+    navigate("/login");
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
@@ -26,17 +39,43 @@ const Register = () => {
           </div>
 
           <div className="input-wrapper">
-            <input type="password" placeholder=" " id="register-password" />
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder=" "
+              id="register-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <label htmlFor="register-password">Password</label>
+            {password && (
+              <button
+                type="button"
+                className="password-toggle-button"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+              </button>
+            )}
           </div>
 
           <div className="input-wrapper">
             <input
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               placeholder=" "
               id="register-confirm-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <label htmlFor="register-confirm-password">Confirm Password</label>
+            {confirmPassword && (
+              <button
+                type="button"
+                className="password-toggle-button"
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                {showConfirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+              </button>
+            )}
           </div>
 
           <button type="submit" className="main-register-button">

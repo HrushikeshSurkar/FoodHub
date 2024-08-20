@@ -42,8 +42,8 @@
         transition: border-color 0.3s;
 
         &::placeholder {
-            color: darken($text-color, 30%); // Darker placeholder color
-            opacity: 1; // Ensures the placeholder is fully opaque
+            color: darken($text-color, 30%);
+            opacity: 1;
         }
 
         &:focus {
@@ -68,6 +68,24 @@
         color: $border-color;
         pointer-events: none;
         transition: all 0.2s ease-out;
+    }
+}
+
+// Password toggle button styling
+.password-toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: darken($text-color, 30%);
+    opacity: 0.7;
+
+    &:hover {
+        opacity: 1;
     }
 }
 
@@ -112,4 +130,15 @@
         margin-left: 5px;
         color: $color4;
     }
+}
+
+// Adjust input-wrapper for icon spacing
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    padding-right: 30px;
 }
