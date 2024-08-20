@@ -1,17 +1,34 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { registerUser } from "../../../services/authService"; // Adjust the import path
 import "./Register.scss";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const navigate = useNavigate();
 
-  const handleRegister = (event) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setCredentials((prev) => ({ ...prev, [name]: value })); // Update email, password, or confirmPassword based on input name
+  };
+
+  const handleRegister = async (event) => {
     event.preventDefault();
+    try {
+      await registerUser(credentials); // Call the register function
+      // Handle successful registration response if needed
+    } catch (error) {
+      toast.warn("Something Went Wrong!");
+      console.error("Registration error:", error);
+    }
   };
 
   const handleSignIn = () => {
@@ -19,11 +36,11 @@ const Register = () => {
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((prev) => !prev); // Toggle password visibility
   };
 
   const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
+    setShowConfirmPassword((prev) => !prev); // Toggle confirm password visibility
   };
 
   return (
@@ -34,7 +51,14 @@ const Register = () => {
         </div>
         <form onSubmit={handleRegister}>
           <div className="input-wrapper">
-            <input type="text" placeholder=" " id="register-email" />
+            <input
+              type="text"
+              placeholder=" "
+              id="register-email"
+              name="email" // Use name attribute for handling changes
+              value={credentials.email}
+              onChange={handleChange} // Update email state
+            />
             <label htmlFor="register-email">Email</label>
           </div>
 
@@ -43,11 +67,12 @@ const Register = () => {
               type={showPassword ? "text" : "password"}
               placeholder=" "
               id="register-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password" // Use name attribute for handling changes
+              value={credentials.password}
+              onChange={handleChange} // Update password state
             />
             <label htmlFor="register-password">Password</label>
-            {password && (
+            {credentials.password && (
               <button
                 type="button"
                 className="password-toggle-button"
@@ -63,11 +88,12 @@ const Register = () => {
               type={showConfirmPassword ? "text" : "password"}
               placeholder=" "
               id="register-confirm-password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              name="confirmPassword" // Use name attribute for handling changes
+              value={credentials.confirmPassword}
+              onChange={handleChange} // Update confirm password state
             />
             <label htmlFor="register-confirm-password">Confirm Password</label>
-            {confirmPassword && (
+            {credentials.confirmPassword && (
               <button
                 type="button"
                 className="password-toggle-button"

@@ -44,6 +44,7 @@ project-root
     │   │   ├── OuterRoutes.jsx      # Public routes
     │   │   ├── routes.jsx      # all routes
     │   ├── services/
+    │   │   ├── authService.jsx
     │   ├── store
     │   │   ├── rootReducer.jsx
     │   │   └── store.jsx

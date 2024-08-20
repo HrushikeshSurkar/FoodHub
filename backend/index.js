@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(sessionConfig); // Apply session middleware
 
 // Routes
-app.use("/api", authRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend is running");

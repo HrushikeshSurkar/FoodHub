@@ -1,16 +1,35 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { loginUser } from "../../../services/authService"; // Adjust the import path
+import { useApp } from "../../../context/AppContext"; // Import the AppContext
 import "./Login.scss";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const { login } = useApp(); // Use the login function from AppContext
 
-  const handleLogin = (event) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setCredentials((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    // Handle login logic here
+    try {
+      const response = await loginUser(credentials); // Call the login function
+      if (response) {
+        // If login is successful
+        login(); // Update authentication state
+        navigate("/home"); // Redirect to home
+      }
+    } catch (error) {
+      toast.warn("Something Went Wrong!");
+      console.error("Login error:", error);
+    }
   };
 
   const handleSignUp = () => {
@@ -18,7 +37,7 @@ const Login = () => {
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -29,7 +48,14 @@ const Login = () => {
         </div>
 
         <div className="input-wrapper">
-          <input type="text" placeholder=" " id="floating-email" />
+          <input
+            type="text"
+            placeholder=" "
+            id="floating-email"
+            name="email"
+            value={credentials.email}
+            onChange={handleChange}
+          />
           <label htmlFor="floating-email">Email</label>
         </div>
 
@@ -38,11 +64,12 @@ const Login = () => {
             type={showPassword ? "text" : "password"}
             placeholder=" "
             id="floating-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} // Update password state
+            name="password"
+            value={credentials.password}
+            onChange={handleChange}
           />
           <label htmlFor="floating-password">Password</label>
-          {password && ( // Show the eye button only if there is input
+          {credentials.password && (
             <button
               type="button"
               className="password-toggle-button"
